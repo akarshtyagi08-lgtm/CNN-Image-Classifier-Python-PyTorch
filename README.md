@@ -13,21 +13,21 @@
   <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/MnistExamples.png" width="550" alt="MNIST Handwritten Digits Sample" />
 </p>
 
-A high-performance deep learning pipeline implementing an end-to-end 2D Convolutional Neural Network (CNN) built with **PyTorch** to classify handwritten digits (0 through 9) from the standard **MNIST** database[span_0](start_span)[span_0](end_span). The model reaches **98.69% test accuracy** after 50 epochs of convergence[span_1](start_span)[span_1](end_span).
+A high-performance deep learning pipeline implementing an end-to-end 2D Convolutional Neural Network (CNN) built with **PyTorch** to classify handwritten digits (0 through 9) from the standard **MNIST** database. The model reaches **98.69% test accuracy** after 50 epochs of convergence.
 
 ---
 
 ## 📌 Project Overview & Technical Specifications
 
-* 🖼️ **Dataset:** MNIST Grayscale Handwritten Digits (28x28 single-channel images)[span_2](start_span)[span_2](end_span)
-* 🏷️ **Number of Classes:** 10 discrete classes (`0` to `9`)[span_3](start_span)[span_3](end_span)
-* 🧠 **Model Family:** 2D Convolutional Neural Network (CNN)[span_4](start_span)[span_4](end_span)
-* 📉 **Loss Criterion:** `nn.CrossEntropyLoss()`[span_5](start_span)[span_5](end_span)
-* ⚙️ **Optimization Routine:** Adam Optimizer (`lr = 0.001`)[span_6](start_span)[span_6](end_span)
-* 📦 **Batch Size:** 64 samples per batch[span_7](start_span)[span_7](end_span)
-* 🔁 **Training Duration:** 50 Full Epochs[span_8](start_span)[span_8](end_span)
+* 🖼️ **Dataset:** MNIST Grayscale Handwritten Digits (28x28 single-channel images)
+* 🏷️ **Number of Classes:** 10 discrete classes (`0` to `9`)
+* 🧠 **Model Family:** 2D Convolutional Neural Network (CNN)
+* 📉 **Loss Criterion:** `nn.CrossEntropyLoss()`
+* ⚙️ **Optimization Routine:** Adam Optimizer (`lr = 0.001`)
+* 📦 **Batch Size:** 64 samples per batch
+* 🔁 **Training Duration:** 50 Full Epochs
 * 🎯 **Final Test Accuracy:** **98.69%**
-* 💾 **Output Checkpoint:** Saved model weights to `model.pth`[span_9](start_span)[span_9](end_span)
+* 💾 **Output Checkpoint:** Saved model weights to `model.pth`
 
 ---
 
@@ -36,8 +36,8 @@ A high-performance deep learning pipeline implementing an end-to-end 2D Convolut
 Ensure your Python runtime environment has the required packages installed:
 
 * `python >= 3.8`
-* `torch` (Core PyTorch library for autograd and neural network layers)[span_10](start_span)[span_10](end_span)
-* `torchvision` (Computer vision datasets and tensor transforms)[span_11](start_span)[span_11](end_span)
+* `torch` (Core PyTorch library for autograd and neural network layers)
+* `torchvision` (Computer vision datasets and tensor transforms)
 
 To install all dependencies with pip, run:
 
@@ -49,7 +49,7 @@ pip install torch torchvision
 
 ## 🧠 Detailed Model Architecture
 
-The `SimpleCNN` model processes single-channel 28x28 pixel arrays by extracting hierarchical spatial representations through 2D convolutions, applying spatial downsampling via 2x2 max pooling, and flattening the output for final linear classification[span_12](start_span)[span_12](end_span).
+The `SimpleCNN` model processes single-channel 28x28 pixel arrays by extracting hierarchical spatial representations through 2D convolutions, applying spatial downsampling via 2x2 max pooling, and flattening the output for final linear classification.
 
 ```text
 Input Tensor: (Batch Size, 1, 28, 28)
@@ -73,14 +73,14 @@ Input Tensor: (Batch Size, 1, 28, 28)
 
 | Layer Type | Input Shape | Output Shape | Parameters / Details |
 | :--- | :--- | :--- | :--- |
-| **Input Image** | `(1, 28, 28)` | `(1, 28, 28)` | Grayscale normalized tensor[span_13](start_span)[span_13](end_span) |
-| **Conv2d (1)** | `(1, 28, 28)` | `(8, 28, 28)` | 8 filters, Kernel: `3x3`, Padding: `1`[span_14](start_span)[span_14](end_span) |
-| **ReLU + MaxPool2d** | `(8, 28, 28)` | `(8, 14, 14)` | Kernel size: `2x2`, Stride: `2`[span_15](start_span)[span_15](end_span) |
-| **Conv2d (2)** | `(8, 14, 14)` | `(16, 14, 14)` | 16 filters, Kernel: `3x3`, Padding: `1`[span_16](start_span)[span_16](end_span) |
-| **ReLU + MaxPool2d** | `(16, 14, 14)` | `(16, 7, 7)` | Kernel size: `2x2`, Stride: `2`[span_17](start_span)[span_17](end_span) |
-| **Flatten** | `(16, 7, 7)` | `(784)` | Linear feature unfolding[span_18](start_span)[span_18](end_span) |
-| **Linear (Dense 1)** | `(784)` | `(64)` | Dense layer with ReLU activation[span_19](start_span)[span_19](end_span) |
-| **Linear (Dense 2)** | `(64)` | `(10)` | 10-Class class output logits[span_20](start_span)[span_20](end_span) |
+| **Input Image** | `(1, 28, 28)` | `(1, 28, 28)` | Grayscale normalized tensor |
+| **Conv2d (1)** | `(1, 28, 28)` | `(8, 28, 28)` | 8 filters, Kernel: `3x3`, Padding: `1` |
+| **ReLU + MaxPool2d** | `(8, 28, 28)` | `(8, 14, 14)` | Kernel size: `2x2`, Stride: `2` |
+| **Conv2d (2)** | `(8, 14, 14)` | `(16, 14, 14)` | 16 filters, Kernel: `3x3`, Padding: `1` |
+| **ReLU + MaxPool2d** | `(16, 14, 14)` | `(16, 7, 7)` | Kernel size: `2x2`, Stride: `2` |
+| **Flatten** | `(16, 7, 7)` | `(784)` | Linear feature unfolding |
+| **Linear (Dense 1)** | `(784)` | `(64)` | Dense layer with ReLU activation |
+| **Linear (Dense 2)** | `(64)` | `(10)` | 10-Class class output logits |
 
 ---
 
@@ -151,14 +151,14 @@ Model Saved as model.pth
 ## 🚀 Training & Inference Guide
 
 ### 1. Run Complete Training Pipeline
-Run the main script to automatically download MNIST, train the model for 50 epochs, print the loss updates, test classification accuracy, and save weights to `model.pth`[span_21](start_span)[span_21](end_span):
+Run the main script to automatically download MNIST, train the model for 50 epochs, print the loss updates, test classification accuracy, and save weights to `model.pth`:
 
 ```bash
 python train.py
 ```
 
 ### 2. Load Model for Testing / Custom Predictions
-Load the model weights from the saved checkpoint file for testing or single-image inference[span_22](start_span)[span_22](end_span):
+Load the model weights from the saved checkpoint file for testing or single-image inference:
 
 ```python
 import torch
