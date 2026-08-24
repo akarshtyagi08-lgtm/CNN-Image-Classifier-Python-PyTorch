@@ -1,38 +1,66 @@
 # ✍️ MNIST Handwritten Digit Recognition (PyTorch CNN)
 
-A Convolutional Neural Network (CNN) built using **PyTorch** to classify handwritten digits (0–9) on the **MNIST** dataset[span_0](start_span)[span_0](end_span). The model reaches a final test accuracy of **98.69%** over 50 epochs[span_1](start_span)[span_1](end_span).
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch" />
+  <img src="https://img.shields.io/badge/Accuracy-98.69%25-success?style=for-the-badge" alt="Accuracy" />
+  <img src="https://img.shields.io/badge/Dataset-MNIST-blue?style=for-the-badge" alt="MNIST" />
+</p>
+
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/MnistExamples.png" width="450" alt="MNIST Handwritten Digits Sample" />
+</p>
+
+A deep learning project implementing a Convolutional Neural Network (CNN) in **PyTorch** to classify handwritten digits (0 through 9) using the benchmark **MNIST** dataset. The model achieves **98.69% test accuracy** after 50 epochs of training.
 
 ---
 
-## 📌 Project Overview
+## 📌 Project Highlights
 
-* **Framework:** PyTorch & Torchvision[span_2](start_span)[span_2](end_span)
-* **Dataset:** MNIST (28x28 grayscale handwritten digit images)[span_3](start_span)[span_3](end_span)
-* **Architecture:** 2 Convolutional layers + MaxPooling + 2 Linear layers[span_4](start_span)[span_4](end_span)
-* **Loss Function:** CrossEntropyLoss[span_5](start_span)[span_5](end_span)
-* **Optimizer:** Adam (lr = 0.001)[span_6](start_span)[span_6](end_span)
-* **Batch Size:** 64[span_7](start_span)[span_7](end_span)
-* **Epochs:** 50[span_8](start_span)[span_8](end_span)
-* **Final Test Accuracy:** **98.69%**
+* 🖼️ **Dataset:** MNIST Grayscale Handwritten Digits (28x28)
+* 🧠 **Architecture:** 2 Convolutional Layers + Max Pooling + 2 Fully Connected Layers
+* ⚙️ **Optimizer:** Adam (Learning Rate = 0.001)
+* 📉 **Loss Function:** CrossEntropyLoss
+* 📦 **Batch Size:** 64
+* 🔁 **Epochs:** 50
+* 🎯 **Final Test Accuracy:** 98.69%
+
+---
+
+## 📦 Required Libraries & Dependencies
+
+Make sure you have the following packages installed in your environment:
+
+* `python` (>= 3.8)
+* `torch` (PyTorch core library for deep learning operations)
+* `torchvision` (For downloading and transforming the MNIST dataset)
+
+To install all required libraries at once, run:
+
+pip install torch torchvision
 
 ---
 
 ## 🧠 Model Architecture
 
-```text
-Input (1x28x28)
-│
-├── Conv2d (1 → 8 filters, kernel=3, padding=1) + ReLU
-├── MaxPool2d (kernel=2) → Output: (8x14x14)
-│
-├── Conv2d (8 → 16 filters, kernel=3, padding=1) + ReLU
-├── MaxPool2d (kernel=2) → Output: (16x7x7)
-│
-├── Flatten (16 * 7 * 7 = 784)
-├── Linear (784 → 64) + ReLU
-└── Linear (64 → 10) → Output
+The custom `SimpleCNN` network processes 28x28 single-channel images through the following pipeline:
 
-📊 Training Logs & Performance
+Input (1x28x28)
+  │
+  ├── Conv2d (in_channels=1, out_channels=8, kernel_size=3, padding=1) + ReLU
+  ├── MaxPool2d (kernel_size=2)  ──> Output shape: (8, 14, 14)
+  │
+  ├── Conv2d (in_channels=8, out_channels=16, kernel_size=3, padding=1) + ReLU
+  ├── MaxPool2d (kernel_size=2)  ──> Output shape: (16, 7, 7)
+  │
+  ├── Flatten (16 * 7 * 7 = 784 elements)
+  ├── Linear (784 ──> 64) + ReLU
+  └── Linear (64 ──> 10)  ──> Logits for digits 0 to 9
+
+---
+
+## 📊 Training Logs & Performance
+
 Epoch: 1/50  | Loss: 322.0067
 Epoch: 2/50  | Loss: 90.0987
 Epoch: 3/50  | Loss: 64.0636
@@ -85,17 +113,17 @@ Epoch: 49/50 | Loss: 3.7569
 Epoch: 50/50 | Loss: 2.7488
 Accuracy in Testing: 98.69%
 
-🛠️ Installation & Requirements
-Install the dependencies:
-pip install torch torchvision
+---
 
-🚀 Execution & Usage
-1. Training the Model
-Run the script to download the MNIST dataset, train across 50 epochs, display results, and export model.pth:
+## 🚀 How to Run
+
+### 1. Training & Evaluation
+Run the training script to fetch the MNIST dataset, train across 50 epochs, print test accuracy, and save weights to `model.pth`:
+
 python train.py
 
-2. Performing Inference
-Load the trained weights model.pth directly into the network:
+### 2. Loading the Model for Predictions
+
 import torch
 from train import SimpleCNN
 
@@ -103,6 +131,5 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = SimpleCNN().to(device)
 model.load_state_dict(torch.load("model.pth", map_location=device))
 model.eval()
-print("Model loaded successfully!")
 
-
+print("Trained model loaded successfully!")
