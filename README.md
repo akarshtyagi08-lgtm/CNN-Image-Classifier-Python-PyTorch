@@ -88,7 +88,7 @@ Input Tensor: (Batch Size, 1, 28, 28)
 
 The following report shows complete epoch loss values and final evaluation metrics across the full training cycle:
 
-```bash
+```python
 Imported all Modules Successfully!
 Device got choosen Successfully: cuda
 
