@@ -90,7 +90,7 @@ The following report shows complete epoch loss values and final evaluation metri
 
 ```text
 Imported all Modules Successfully!
-Device got choosen Successfully: cpu
+Device got choosen Successfully: cuda
 
 Epoch: 1/50  | Loss: 322.0067
 Epoch: 2/50  | Loss: 90.0987
