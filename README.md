@@ -1,45 +1,45 @@
 # ✍️ MNIST Handwritten Digit Recognition (PyTorch CNN)
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
-  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch" />
-  <img src="https://img.shields.io/badge/Torchvision-FF6F00?style=for-the-badge&logo=pytorch&logoColor=white" alt="Torchvision" />
+  <img src="https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch" />
+  <img src="https://img.shields.io/badge/Torchvision-Dataset-FF6F00?style=for-the-badge&logo=pytorch&logoColor=white" alt="Torchvision" />
   <img src="https://img.shields.io/badge/Accuracy-98.69%25-success?style=for-the-badge" alt="Accuracy" />
+  <img src="https://img.shields.io/badge/Architecture-Custom%20CNN-blueviolet?style=for-the-badge" alt="CNN" />
   <img src="https://img.shields.io/badge/Dataset-MNIST-blue?style=for-the-badge" alt="MNIST" />
-  <img src="https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge" alt="Status" />
 </p>
 
 <p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/MnistExamples.png" width="500" alt="MNIST Handwritten Digits Sample" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/MnistExamples.png" width="550" alt="MNIST Handwritten Digits Sample" />
 </p>
 
-A deep learning project implementing a Convolutional Neural Network (CNN) built with **PyTorch** to classify handwritten digits (0 through 9) using the **MNIST** dataset[span_0](start_span)[span_0](end_span). The model achieves a **98.69% test accuracy** after 50 epochs of training[span_1](start_span)[span_1](end_span).
+A high-performance deep learning pipeline implementing an end-to-end 2D Convolutional Neural Network (CNN) built with **PyTorch** to classify handwritten digits (0 through 9) from the standard **MNIST** database[span_0](start_span)[span_0](end_span). The model reaches **98.69% test accuracy** after 50 epochs of convergence[span_1](start_span)[span_1](end_span).
 
 ---
 
-## 📌 Project Overview & Specifications
+## 📌 Project Overview & Technical Specifications
 
-* 🖼️ **Dataset:** MNIST Grayscale Handwritten Digits (28x28 pixels)[span_2](start_span)[span_2](end_span)
-* 🏷️ **Classes:** 10 classes (`0` to `9`)[span_3](start_span)[span_3](end_span)
-* 🧠 **Network Type:** 2D Convolutional Neural Network (CNN)[span_4](start_span)[span_4](end_span)
-* 📉 **Loss Function:** `nn.CrossEntropyLoss()`[span_5](start_span)[span_5](end_span)
-* ⚙️ **Optimization Algorithm:** Adam Optimizer ($lr = 0.001$)[span_6](start_span)[span_6](end_span)
-* 📦 **Batch Size:** 64[span_7](start_span)[span_7](end_span)
-* 🔁 **Total Epochs:** 50[span_8](start_span)[span_8](end_span)
-* 🎯 **Final Testing Accuracy:** **98.69%**
-* 💾 **Model Weights:** Saved locally as `model.pth`[span_9](start_span)[span_9](end_span)
+* 🖼️ **Dataset:** MNIST Grayscale Handwritten Digits (28x28 single-channel images)[span_2](start_span)[span_2](end_span)
+* 🏷️ **Number of Classes:** 10 discrete classes (`0` to `9`)[span_3](start_span)[span_3](end_span)
+* 🧠 **Model Family:** 2D Convolutional Neural Network (CNN)[span_4](start_span)[span_4](end_span)
+* 📉 **Loss Criterion:** `nn.CrossEntropyLoss()`[span_5](start_span)[span_5](end_span)
+* ⚙️ **Optimization Routine:** Adam Optimizer (`lr = 0.001`)[span_6](start_span)[span_6](end_span)
+* 📦 **Batch Size:** 64 samples per batch[span_7](start_span)[span_7](end_span)
+* 🔁 **Training Duration:** 50 Full Epochs[span_8](start_span)[span_8](end_span)
+* 🎯 **Final Test Accuracy:** **98.69%**
+* 💾 **Output Checkpoint:** Saved model weights to `model.pth`[span_9](start_span)[span_9](end_span)
 
 ---
 
 ## 📦 Required Libraries & Dependencies
 
-Ensure your environment satisfies the following package requirements:
+Ensure your Python runtime environment has the required packages installed:
 
 * `python >= 3.8`
-* `torch` (Core PyTorch tensor computation and neural network modules)
-* `torchvision` (Datasets, transforms, and utilities for computer vision)
+* `torch` (Core PyTorch library for autograd and neural network layers)[span_10](start_span)[span_10](end_span)
+* `torchvision` (Computer vision datasets and tensor transforms)[span_11](start_span)[span_11](end_span)
 
-To install all required libraries, run:
+To install all dependencies with pip, run:
 
 ```bash
 pip install torch torchvision
@@ -49,45 +49,49 @@ pip install torch torchvision
 
 ## 🧠 Detailed Model Architecture
 
-The `SimpleCNN` network architecture processes single-channel $28 \times 28$ image tensors through feature extraction and linear classification layers[span_10](start_span)[span_10](end_span):
+The `SimpleCNN` model processes single-channel 28x28 pixel arrays by extracting hierarchical spatial representations through 2D convolutions, applying spatial downsampling via 2x2 max pooling, and flattening the output for final linear classification[span_12](start_span)[span_12](end_span).
 
 ```text
-Input Tensor (Batch, 1, 28, 28)
-│
-├── [Layer 1] Conv2d (in=1, out=8, kernel=3, padding=1) ──> (Batch, 8, 28, 28)
-├── [Activation] ReLU()
-├── [Pooling] MaxPool2d (kernel=2) ─────────────────────────> (Batch, 8, 14, 14)
-│
-├── [Layer 2] Conv2d (in=8, out=16, kernel=3, padding=1) ─> (Batch, 16, 14, 14)
-├── [Activation] ReLU()
-├── [Pooling] MaxPool2d (kernel=2) ─────────────────────────> (Batch, 16, 7, 7)
-│
-├── [Flattening] view(batch_size, 16 * 7 * 7) ──────────────> (Batch, 784)
-│
-├── [Classifier 1] Linear (in=784, out=64) ─────────────────> (Batch, 64)
-├── [Activation] ReLU()
-└── [Classifier 2] Linear (in=64, out=10) ──────────────────> (Batch, 10) [Logits]
+Input Tensor: (Batch Size, 1, 28, 28)
+ │
+ ├── [Layer 1] Conv2d (in=1, out=8, kernel=3, padding=1)  ──> (Batch, 8, 28, 28)
+ ├── [Activation] ReLU()
+ ├── [Pooling] MaxPool2d (kernel=2) ─────────────────────────> (Batch, 8, 14, 14)
+ │
+ ├── [Layer 2] Conv2d (in=8, out=16, kernel=3, padding=1) ─> (Batch, 16, 14, 14)
+ ├── [Activation] ReLU()
+ ├── [Pooling] MaxPool2d (kernel=2) ─────────────────────────> (Batch, 16, 7, 7)
+ │
+ ├── [Flattening] view(batch_size, 16 * 7 * 7) ──────────────> (Batch, 784)
+ │
+ ├── [Classifier 1] Linear (in=784, out=64) ─────────────────> (Batch, 64)
+ ├── [Activation] ReLU()
+ └── [Classifier 2] Linear (in=64, out=10) ──────────────────> (Batch, 10) [Logits Output]
 ```
 
-### Layer Summary Table
+### Layer Configuration Summary
 
-| Stage | Layer Type | Input Dimension | Output Dimension | Activation / Kernel |
-| :--- | :--- | :--- | :--- | :--- |
-| **Feature Extractor** | `Conv2d` | `1 x 28 x 28` | `8 x 28 x 28` | Kernel: `3x3`, Padding: `1`[span_11](start_span)[span_11](end_span) |
-| **Downsampling 1** | `MaxPool2d` | `8 x 28 x 28` | `8 x 14 x 14` | Kernel: `2x2`[span_12](start_span)[span_12](end_span) |
-| **Feature Extractor** | `Conv2d` | `8 x 14 x 14` | `16 x 14 x 14` | Kernel: `3x3`, Padding: `1`[span_13](start_span)[span_13](end_span) |
-| **Downsampling 2** | `MaxPool2d` | `16 x 14 x 14` | `16 x 7 x 7` | Kernel: `2x2`[span_14](start_span)[span_14](end_span) |
-| **Flatten** | `Tensor View` | `16 x 7 x 7` | `784` | Flat vector[span_15](start_span)[span_15](end_span) |
-| **Dense Layer 1** | `Linear` | `784` | `64` | `ReLU`[span_16](start_span)[span_16](end_span) |
-| **Output Layer** | `Linear` | `64` | `10` | 10-Class Logits[span_17](start_span)[span_17](end_span) |
+| Layer Type | Input Shape | Output Shape | Parameters / Details |
+| :--- | :--- | :--- | :--- |
+| **Input Image** | `(1, 28, 28)` | `(1, 28, 28)` | Grayscale normalized tensor[span_13](start_span)[span_13](end_span) |
+| **Conv2d (1)** | `(1, 28, 28)` | `(8, 28, 28)` | 8 filters, Kernel: `3x3`, Padding: `1`[span_14](start_span)[span_14](end_span) |
+| **ReLU + MaxPool2d** | `(8, 28, 28)` | `(8, 14, 14)` | Kernel size: `2x2`, Stride: `2`[span_15](start_span)[span_15](end_span) |
+| **Conv2d (2)** | `(8, 14, 14)` | `(16, 14, 14)` | 16 filters, Kernel: `3x3`, Padding: `1`[span_16](start_span)[span_16](end_span) |
+| **ReLU + MaxPool2d** | `(16, 14, 14)` | `(16, 7, 7)` | Kernel size: `2x2`, Stride: `2`[span_17](start_span)[span_17](end_span) |
+| **Flatten** | `(16, 7, 7)` | `(784)` | Linear feature unfolding[span_18](start_span)[span_18](end_span) |
+| **Linear (Dense 1)** | `(784)` | `(64)` | Dense layer with ReLU activation[span_19](start_span)[span_19](end_span) |
+| **Linear (Dense 2)** | `(64)` | `(10)` | 10-Class class output logits[span_20](start_span)[span_20](end_span) |
 
 ---
 
 ## 📊 Training Logs & Performance Report
 
-Complete terminal training logs across all 50 epochs:
+The following report shows complete epoch loss values and final evaluation metrics across the full training cycle:
 
 ```text
+Imported all Modules Successfully!
+Device got choosen Successfully: cpu
+
 Epoch: 1/50  | Loss: 322.0067
 Epoch: 2/50  | Loss: 90.0987
 Epoch: 3/50  | Loss: 64.0636
@@ -144,29 +148,29 @@ Model Saved as model.pth
 
 ---
 
-## 🚀 How to Run & Use
+## 🚀 Training & Inference Guide
 
-### 1. Training and Evaluation Pipeline
-Execute the training script to fetch the MNIST dataset, train across 50 epochs, compute evaluation metrics, and export the trained model state:
+### 1. Run Complete Training Pipeline
+Run the main script to automatically download MNIST, train the model for 50 epochs, print the loss updates, test classification accuracy, and save weights to `model.pth`[span_21](start_span)[span_21](end_span):
 
 ```bash
 python train.py
 ```
 
-### 2. Inference / Model Loading Script
-Load the saved state dictionary (`model.pth`) and perform sample classification:
+### 2. Load Model for Testing / Custom Predictions
+Load the model weights from the saved checkpoint file for testing or single-image inference[span_22](start_span)[span_22](end_span):
 
 ```python
 import torch
 from train import SimpleCNN
 
-# Setup compute device
+# Select device (GPU / CPU)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# Initialize architecture and load weights
+# Initialize model instance and load trained weights
 model = SimpleCNN().to(device)
 model.load_state_dict(torch.load("model.pth", map_location=device))
 model.eval()
 
-print("PyTorch model loaded successfully and ready for evaluation!")
+print("Model checkpoint loaded successfully and set to evaluation mode!")
 ```
